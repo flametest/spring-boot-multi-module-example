@@ -28,6 +28,7 @@
         <module>demo-starter</module>
         <module>demo-user</module>
         <module>demo-email</module>
+        <module>demo-file</module>
     </modules>
     <scm>
         <connection/>
