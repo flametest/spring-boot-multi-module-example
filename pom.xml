@@ -27,6 +27,9 @@
         <module>demo-server</module>
         <module>demo-starter</module>
         <module>demo-user</module>
+        <module>demo-email</module>
+        <module>demo-email/demo-email-api</module>
+        <module>demo-email/demo-email-service</module>
     </modules>
     <scm>
         <connection/>
