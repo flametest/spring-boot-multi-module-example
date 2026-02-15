@@ -5,7 +5,7 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
 
@@ -19,8 +19,3 @@ mybatis-plus:
     cache-enabled: false
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:mapper/**/*.xml
-  global-config:
-    db-config:
-      logic-delete-field: deleted_at
-      logic-not-delete-value: 0
-      logic-delete-value: UNIX_TIMESTAMP()

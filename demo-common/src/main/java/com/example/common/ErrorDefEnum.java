@@ -10,6 +10,8 @@ import java.io.Serializable;
 public enum ErrorDefEnum implements Serializable {
     INVALID_PARAM_EXCEPTION(400, "Invalid Parameter Exception"),
 
+    NOT_FOUND_EXCEPTION(404, "Item Not Found"),
+
     COMMON_EXCEPTION(500, "Internal Server Error")
     ;
 

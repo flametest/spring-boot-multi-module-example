@@ -1,4 +1,4 @@
-package com.example.server.controller.dto;
+package com.example.user.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserDTO {
     private Long id;
     private String firstName;
     private String lastName;

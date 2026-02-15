@@ -24,7 +24,6 @@ public class BaseEntity implements Serializable {
     private String createdBy;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updatedBy;
-    @TableLogic
     private LocalDateTime deletedAt;
     private String deletedBy;
 }
