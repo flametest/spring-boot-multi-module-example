@@ -2,6 +2,7 @@ package com.example.server.config;
 
 import com.example.common.DemoException;
 import com.example.common.ErrorDefEnum;
+import com.example.common.IgnoreResponseAdvice;
 import com.example.common.VResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -23,6 +24,9 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+        if (returnType.hasMethodAnnotation(IgnoreResponseAdvice.class)) {
+            return false;
+        }
         if (body instanceof VResponse) {
             return body;
         }
