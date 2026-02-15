@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>demo-user-api</artifactId>
+            <artifactId>demo-user-service</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
