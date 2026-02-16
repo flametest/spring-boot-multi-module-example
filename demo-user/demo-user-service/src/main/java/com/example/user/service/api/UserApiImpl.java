@@ -28,6 +28,7 @@ public class UserApiImpl implements UserApi {
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .email(userEntity.getEmail())
+                .gender(userEntity.getGender())
                 .build();
     }
 }

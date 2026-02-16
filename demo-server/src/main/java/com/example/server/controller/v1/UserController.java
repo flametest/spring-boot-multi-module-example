@@ -23,6 +23,7 @@ public class UserController {
                 .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
+                .gender(userDTO.getGender())
                 .build();
     }
 }

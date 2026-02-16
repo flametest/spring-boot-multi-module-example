@@ -3,7 +3,7 @@ package com.example.common;
 import lombok.Data;
 
 @Data
-public class DemoException extends RuntimeException{
+public class DemoException extends RuntimeException {
 
     private final ErrorDefEnum errorDefEnum;
 

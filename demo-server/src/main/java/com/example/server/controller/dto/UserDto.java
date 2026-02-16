@@ -1,5 +1,6 @@
 package com.example.server.controller.dto;
 
+import com.example.common.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    private Gender gender;
 }

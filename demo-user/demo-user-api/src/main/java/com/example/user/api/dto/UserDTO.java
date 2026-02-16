@@ -1,5 +1,6 @@
 package com.example.user.api.dto;
 
+import com.example.common.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private Gender gender;
 }
