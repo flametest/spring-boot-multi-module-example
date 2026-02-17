@@ -9,10 +9,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import java.util.Collections;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -42,10 +47,12 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public VResponse<?> methodArgNotValidException(MethodArgumentNotValidException e) {
         log.error("Validate Exception", e);
-        // TODO
-        String msg = e.getBindingResult()
-                .getFieldError()
-                .getDefaultMessage();
+        String msg = Optional.ofNullable(e.getBindingResult().getAllErrors())
+                .orElseGet(Collections::emptyList)
+                .stream()
+                .map(ObjectError::getDefaultMessage)
+                .distinct()
+                .collect(Collectors.joining(", "));
         return new VResponse<>(400, msg, null);
     }
 
