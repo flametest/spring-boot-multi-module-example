@@ -19,8 +19,8 @@ public class HttpMessageConverterConfig implements WebMvcConfigurer {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         SimpleModule simpleModule = new SimpleModule();
 
-        simpleModule.addSerializer(BaseEnum.class, new BaseEnumSerializer());
-        simpleModule.addDeserializer(BaseEnum.class, new BaseEnumDeserializer());
+        simpleModule.addSerializer(Enum.class, new BaseEnumSerializer());
+        simpleModule.addDeserializer(Enum.class, new BaseEnumDeserializer());
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

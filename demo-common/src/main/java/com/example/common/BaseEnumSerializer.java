@@ -7,15 +7,20 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-public class BaseEnumSerializer extends JsonSerializer<BaseEnum> {
+public class BaseEnumSerializer extends JsonSerializer<Enum> {
 
     @Override
-    public void serialize(BaseEnum baseEnum, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeObject(baseEnum.getValue());
-        String currentName = jsonGenerator.getOutputContext().getCurrentName();
-        if (CharSequenceUtil.isBlank(currentName)) {
-            currentName = jsonGenerator.getOutputContext().getParent().getCurrentName();
+    public void serialize(Enum value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        if (value instanceof BaseEnum) {
+            BaseEnum v = (BaseEnum) value;
+            jsonGenerator.writeObject(v.getValue());
+            String currentName = jsonGenerator.getOutputContext().getCurrentName();
+            if (CharSequenceUtil.isBlank(currentName)) {
+                currentName = jsonGenerator.getOutputContext().getParent().getCurrentName();
+            }
+            jsonGenerator.writeObjectField(currentName + "Desc", v.getDesc());
+        } else {
+            jsonGenerator.writeObject(value.toString());
         }
-        jsonGenerator.writeObjectField(currentName + "Desc", baseEnum.getDesc());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.server.controller.dto;
 
+import com.example.common.enums.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -21,4 +22,5 @@ public class CreateUserRequest implements Serializable {
     private String userName;
     @Email
     private String email;
+    private Gender gender;
 }
