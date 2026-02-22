@@ -1,6 +1,5 @@
 package com.example.server.config;
 
-import com.example.common.BaseEnum;
 import com.example.common.BaseEnumDeserializer;
 import com.example.common.BaseEnumSerializer;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,20 +15,21 @@ import java.util.List;
 @Configuration
 public class HttpMessageConverterConfig implements WebMvcConfigurer {
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         SimpleModule simpleModule = new SimpleModule();
 
         simpleModule.addSerializer(Enum.class, new BaseEnumSerializer());
         simpleModule.addDeserializer(Enum.class, new BaseEnumDeserializer());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.registerModule(simpleModule);
-
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(objectMapper);
-
-        converters.removeIf(MappingJackson2HttpMessageConverter.class::isInstance);
-        converters.add(0, converter);
+        // find the existing MappingJackson2HttpMessageConverter and modify its ObjectMapper
+        converters.stream()
+                .filter(converter -> converter instanceof MappingJackson2HttpMessageConverter)
+                .findFirst()
+                .ifPresent(converter -> {
+                    MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
+                    ObjectMapper objectMapper = jsonConverter.getObjectMapper();
+                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                    objectMapper.registerModule(simpleModule);
+                });
     }
 }
